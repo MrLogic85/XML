@@ -34,10 +34,14 @@ class XMLElement(
 	def toString(ident: String): String = {
 		var str = ident + "<" + name + "";
 		attributes foreach (attr => str += " " + attr.name + "=\"" + attr.value + "\"")
-		str += ">" + data + (if (children.length > 0) "\n" else "");
-		children foreach (_.toString(ident + "\t") + "\n")
-		str += (if (children.length > 0) ident else "") + "</" + name + ">";
-		str;
+		if (data.length == 0 && children.length == 0)
+			str += "/>"
+		else {
+			str += ">" + data + (if (children.length > 0) "\n" else "")
+			children foreach (str += _.toString(ident + "\t") + "\n")
+			str += (if (children.length > 0) ident else "") + "</" + name + ">"
+		}
+		str
 	}
 }
 

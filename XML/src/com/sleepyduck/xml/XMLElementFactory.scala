@@ -1,13 +1,10 @@
-package com.bombardier.xml;
+package com.sleepyduck.xml
 
 import java.io.StringReader
 
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.helpers.DefaultHandler
-
-import com.sleepyduck.xml.XMLElement
-import com.sleepyduck.xml.XMLParsable
 
 import javax.xml.parsers.SAXParserFactory
 
@@ -33,7 +30,7 @@ object XMLElementFactory {
 
 			override def characters(ch: Array[Char], start: Int, length: Int) = {
 				def isNotWhitespace(ch: Char) = !(Character isWhitespace ch)
-				val offset = ch.indexWhere(isNotWhitespace, start)
+				val offset = ch.indexWhere(isNotWhitespace, start) - start
 				currentElement.data = String.valueOf(ch, start + offset, length - offset)
 			}
 

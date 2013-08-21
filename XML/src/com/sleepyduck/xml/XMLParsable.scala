@@ -1,7 +1,5 @@
 package com.sleepyduck.xml
 
-import com.bombardier.xml.XMLElementFactory
-
 trait XMLParsable {
 	val _XMLElementFactory: XMLElementFactory = new XMLElementFactory(this)
 
