@@ -2,7 +2,7 @@ package com.sleepyduck.xml
 
 import scala.collection.mutable.ArrayBuffer
 
-class XMLElement(
+case class XMLElement(
 	var name: String = "",
 	var data: String = "",
 	val children: ArrayBuffer[XMLElement] = ArrayBuffer[XMLElement](),
@@ -20,7 +20,7 @@ class XMLElement(
 
 	def getElement(name: String): XMLElement = {
 		if (this.name == name) this
-		else (children map (_.getElement(name)) headOption) getOrElse null
+		else (children map (_.getElement(name)) filter (_ != null) headOption) getOrElse null
 	}
 
 	def getElement(elementName: String, attributeName: String, attributeValue: String): XMLElement = {
@@ -45,4 +45,4 @@ class XMLElement(
 	}
 }
 
-case class Attribute(name: String, value: String)
+case class Attribute(var name: String, var value: String)
